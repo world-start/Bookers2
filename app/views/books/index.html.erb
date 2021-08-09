@@ -1,0 +1,16 @@
+Books
+<% @books.each do |book| %>
+<table>
+  <thead>
+    <tr>
+      <th><%= image_tag('no_image.jpg')</th>
+      <th>Title</th>
+      <th>Opinion</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <tr><%= book.title %></tr>
+    <tr><%= book.opinion %></tr>
+  </tbody>
+</table>
