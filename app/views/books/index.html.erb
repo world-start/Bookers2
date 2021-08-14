@@ -1,16 +1,58 @@
-Books
-<% @books.each do |book| %>
-<table>
-  <thead>
-    <tr>
-      <th><%= image_tag('no_image.jpg')</th>
-      <th>Title</th>
-      <th>Opinion</th>
-    </tr>
-  </thead>
+<!--/booksページ　-->
+<p id="notice">Signed in successfully.</p>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3">
+      <h2>User info</h2>
+      <%= image_tag('no_image.jpg') %>
+      <table class="table">
+        <tbody>
+          <tr></tr>
+          <tr>
+        	  <th>name</th>
+        	  <th>kk</th>
+          </tr>
+          <tr>
+        	  <th>introduction</th>
+        	  <th></th>
+          </tr>
+        </tbody>
+      </table>
+    　<div class="row">
+       <%= link_to edit_user_path, class: "btn btn-outline-secondary form-control" do %>
+         <i class="fas fa-user-cog"></i>
+       <% end %>
+      </div>
+      
+      
+  <h2>New book</h2>
+  <%= form_with model: @book, local:true do |f| %>
+    <label>Title</label><br>
+    <%= f.text_field :title %><br>
+    <label>Opinion</label><br>
+    <%= f.text_area :opinion %><br>
+    <%= link_to 'Create book',book_path, class:"btn btn-success" %>
+  <% end %>
+  </div>
   
-  <tbody>
-    <tr><%= book.title %></tr>
-    <tr><%= book.opinion %></tr>
-  </tbody>
-</table>
+  <div class="col-md-8 offset-md-1"><!--なぜmd-1？-->
+  <h2>Books</h2>
+  <table class="table table-hover table-inverse">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Title</th>
+        <th>Opinion</th>
+        <th colspan="3"></th>
+      </tr>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+  </table>
+  </div>
+  
+</div>
+</div>

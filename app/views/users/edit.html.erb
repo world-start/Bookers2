@@ -1,0 +1,24 @@
+<!--/users/:id/editページ-->
+<h2>User info</h2>
+<%= form_with model:@user, local:true do |f| %>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+  <!--ボタンまだ途中-->
+  <div class="btn-wrapper col-10 mx-auto">
+        <div class="row">
+          <div class="btn btn-success btn-sm btn-block sign_up" href="/users/sign_up">Sign Up</div>
+          <%= f.label :image %><br>
+        </div>
+      </div>
+  <div class="image">
+    
+  </div>
+  
+  <div class="introduction">
+    <%= f.label :Introduction %><br>
+    <%= f.text_field :Introduction, autofocus: true %>
+  </div>
+  
+<% end %>
