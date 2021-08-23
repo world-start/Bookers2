@@ -1,19 +1,21 @@
+
+
 <p id="notice">Signed in successfully.</p>
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-md-3">
       <h2>User info</h2>
-      <%= image_tag('no_image.jpg') %>
+      <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
       <table class="table">
         <tbody>
           <tr></tr>
           <tr>
         	  <th>name</th>
-        	  <th>kk</th>
+        	  <th><%= @user.name %></th>
           </tr>
           <tr>
         	  <th>introduction</th>
-        	  <th></th>
+        	  <th><%= @user.introduction %></th>
           </tr>
         </tbody>
       </table>
@@ -25,42 +27,55 @@
   
       
   <h2>New book</h2>
-  <%= form_with model: @book, local:true do |f| %>
+  <%= form_with model: @newbook, method: :post, local:true do |f| %>
     <label>Title</label><br>
     <%= f.text_field :title %><br>
     <label>Opinion</label><br>
     <%= f.text_area :opinion %><br>
-    <%= link_to 'Create book',book_path, class:"btn btn-success" %>
+    <%= f.submit 'Create book', class:"btn btn-success" %>
   <% end %>
   </div>
   
   <div class="col-md-8 offset-md-1"><!--なぜmd-1？-->
   <h2>Book detail</h2>
-  <table style="width: 100%;" class="book-detail-table">
-    <colgroup>
-      <col style="width: 20">
-      <col style="width: 20">
-      <col style="width: 20">
-      <col style="width: 20">
-      <col style="width: 20">
-    </colgroup>
-    <tbody>
-      <tr>
-        <td><%= image_tag('no_image.jpg') %></td>
-        <td><%= link_to 'title', book_path %></td>
-        <td>opinion</td>
-        <td><%= link_to 'Edit',edit_book_path, class:"btn btn-success" %></td>
-        <td>
-          <!--コピー.txtのif文入れる-->
-            <%= link_to 'Destroy',books_path(@book), method: :delet, class:"btn btn-danger" %>
-        </td>
-      </tr>
-      <tr>
-        <td><%= link_to 'name', user_path %></td>
-      </tr>
-    </tbody>
-  </table>
+ 
+      <table style="width: 100%;" class="book-detail-table">
+        <colgroup>
+          <col style="width: 20%">
+          <col style="width: 20%">
+          <col style="width: 20%">
+          <col style="width: 20%">
+          <col style="width: 20%">
+        </colgroup>
+        <tbody>
+          <tr>
+            <td>
+              <%= link_to user_path(@user.id) do %>
+                <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
+              <% end %> 
+            </td>
+            <td>
+              <%= link_to book_path(@book.id) do %>
+                <%= @book.title %>
+              <% end %>
+            </td>
+            <td><%= @book.opinion %></td>
+            <td><%= link_to 'Edit',edit_book_path, class:"btn btn-success" %></td>
+            <td>
+              <!--コピー.txtのif文入れる-->
+                <%= link_to 'Destroy',book_path(@book.id), method: :delete, class:"btn btn-danger" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= link_to user_path(@user) do %>
+                <%= current_user.name %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+    </div>
+   </div>
   </div>
-  </div>
-  
-</div>

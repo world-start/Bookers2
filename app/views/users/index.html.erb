@@ -1,5 +1,3 @@
-<!--ログイン後の遷移先ページ  users/:id-->
-
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-md-3">
@@ -19,10 +17,11 @@
         </tbody>
       </table>
 　<div class="row">
-   <%= link_to edit_user_path, class: "btn btn-outline-secondary form-control" do %>
+   <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary form-control" do %>
      <i class="fas fa-user-cog"></i>
    <% end %>
   </div>
+  
      <h2>New book</h2>
   <%= form_with model: @book, method: :post, local:true do |f| %>
     <label>Title</label><br>
@@ -33,7 +32,7 @@
   <% end %>
   </div>
     <div class="col-md-8 offset-md-1">
-      <h2>Books</h2>
+      <h2>Book</h2>
        <table style="width: 100%;" class="book-detail-table">
         <colgroup>
           <col style="width: 25%">
@@ -49,26 +48,10 @@
         <th>Opinion</th>
         <th colspan="3"></th>
       </tr>
-       <% @books.each do |book| %>
-      <tr>
-        <th>
-          <%= link_to user_path(@user.id) do %>
-            <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
-          <% end %>    
-        </th>
-        <th>
-          <%= link_to book_path(book) do %>
-            <%= book.title %>
-          <% end %>
-        </th>
-        <th><%= book.opinion %></th>
-        <th colspan="3"></th>
-      </tr>
-      <% end %>
     </thead>
+    
   </table>
   </div>
     </div>
   </div>
 </div>
-      

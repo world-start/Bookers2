@@ -1,37 +1,48 @@
 <!--/booksページ　-->
 <p id="notice">Signed in successfully.</p>
+<!--エラーメッセージ部分-->
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this obj from being saved:
+  <% @book.errors.full_messages.each do |message| %>
+  <ul>
+    <li><%= message %></li>
+  </ul>
+  <% end %>
+<% end %>
+
+
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-md-3">
       <h2>User info</h2>
-      <%= image_tag('no_image.jpg') %>
+      <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
       <table class="table">
         <tbody>
           <tr></tr>
           <tr>
         	  <th>name</th>
-        	  <th>kk</th>
+        	  <th><%= @user.name %></th>
           </tr>
           <tr>
         	  <th>introduction</th>
-        	  <th></th>
+        	  <th><%= @user.introduction %></th>
           </tr>
         </tbody>
       </table>
     　<div class="row">
-       <%= link_to edit_user_path, class: "btn btn-outline-secondary form-control" do %>
+       <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary form-control" do %>
          <i class="fas fa-user-cog"></i>
        <% end %>
       </div>
       
       
   <h2>New book</h2>
-  <%= form_with model: @book, local:true do |f| %>
+  <%= form_with model: @book, method: :post, local:true do |f| %>
     <label>Title</label><br>
     <%= f.text_field :title %><br>
     <label>Opinion</label><br>
     <%= f.text_area :opinion %><br>
-    <%= link_to 'Create book',book_path, class:"btn btn-success" %>
+    <%= f.submit 'Create book', class:"btn btn-success" %>
   <% end %>
   </div>
   
@@ -45,11 +56,22 @@
         <th>Opinion</th>
         <th colspan="3"></th>
       </tr>
+      <% @books.each do |book| %>
       <tr>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th>
+          <%= link_to user_path(@user.id) do %>
+            <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
+          <% end %>    
+        </th>
+        <th>
+          <%= link_to book_path(book) do %>
+            <%= book.title %>
+          <% end %>
+        </th>
+        <th><%= book.opinion %></th>
+        <th colspan="3"></th>
       </tr>
+      <% end %>
     </thead>
   </table>
   </div>

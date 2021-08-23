@@ -1,24 +1,26 @@
 <!--/users/:id/editページ-->
-<h2>User info</h2>
-<%= form_with model:@user, local:true do |f| %>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, autofocus: true %>
-  </div>
-  <!--ボタンまだ途中-->
-  <div class="btn-wrapper col-10 mx-auto">
-        <div class="row">
-          <div class="btn btn-success btn-sm btn-block sign_up" href="/users/sign_up">Sign Up</div>
-          <%= f.label :image %><br>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3">
+      <h2>User info</h2>
+      <%= form_with model:@user, local:true do |f| %>
+        <div class="field">
+          <%= f.label :name %><br>
+          <%= f.text_field :name, autofocus: true %>
         </div>
-      </div>
-  <div class="image">
-    
+        
+       
+        <label>Image</label><br>
+        <%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %>
+        
+        <div class="introduction">
+          <%= f.label :Introduction %><br>
+          <%= f.text_field :introduction, autofocus: true %>
+        </div>
+        
+        <%= f.submit 'Update', class:"btn btn-secondary" %>
+        
+      <% end %>
+    </div>
   </div>
-  
-  <div class="introduction">
-    <%= f.label :Introduction %><br>
-    <%= f.text_field :Introduction, autofocus: true %>
-  </div>
-  
-<% end %>
+</div>
