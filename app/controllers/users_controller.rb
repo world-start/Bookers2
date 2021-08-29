@@ -2,17 +2,21 @@ class UsersController < ApplicationController
   def index
     @user = current_user
     @users = User.all
+    @book = Book.new
   end
   
   def show
-    @book = Book.new
+    @newbook = Book.new
     @user = User.find(params[:id])
-    @books = @user.books.all
+    @books = @user.books
    
   end
   
   def edit
     @user = User.find(params[:id])
+    unless @user.id == current_user.id
+      redirect_to current_user
+    end
   end
   
   def update
@@ -23,9 +27,9 @@ class UsersController < ApplicationController
       flash[:notice] = "You have updated user successfully."
       redirect_to user_path(@user.id)
     else
-      render edit_user_path(current_user)
+      render :edit
     end
-    # edit_user_pathの引数
+
   end
   
 

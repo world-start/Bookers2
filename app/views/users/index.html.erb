@@ -27,31 +27,41 @@
     <label>Title</label><br>
     <%= f.text_field :title %><br>
     <label>Opinion</label><br>
-    <%= f.text_area :opinion %><br>
-    <%= f.submit 'Create book', class:"btn btn-success" %>
+    <%= f.text_area :body %><br>
+    <%= f.submit 'Create Book', class:"btn btn-success" %>
   <% end %>
   </div>
+  
+  
+  
     <div class="col-md-8 offset-md-1">
-      <h2>Book</h2>
+      <h2>Users</h2>
        <table style="width: 100%;" class="book-detail-table">
         <colgroup>
-          <col style="width: 25%">
-          <col style="width: 25%">
-          <col style="width: 25%">
-          <col style="width: 25%">
+          <col style="width: 30%">
+          <col style="width: 30%">
+          <col style="width: 30%">
         </colgroup>
-      <table class="table table-hover table-inverse">
+       </table>
+    <table class="table table-hover table-inverse">
     <thead>
       <tr>
-        <th></th>
-        <th>Title</th>
-        <th>Opinion</th>
+        <th>image</th>
+        <th>name</th>
         <th colspan="3"></th>
       </tr>
+      <% @users.each do |user| %>
+      <tr>
+        <th><%= attachment_image_tag user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %></th>
+        <th><%= user.name %></th>
+        <th><%= link_to 'Show', user_path(user.id) %></th>
+      </tr>
+      <% end %>
     </thead>
-    
   </table>
   </div>
-    </div>
+  
+  
+  
   </div>
 </div>

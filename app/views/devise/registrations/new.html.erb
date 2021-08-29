@@ -3,8 +3,16 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0">
-      
+      <!--@userはどこで定義されているか-->
       <h2>Sign up</h2>
+      <% if @user.errors.any? %>
+        <%= @user.errors.count %>errors prohibited this obj from being saved:
+        <% @user.errors.full_messages.each do |message| %>
+        <ul>
+          <li><%= message %></li>
+        </ul>
+        <% end %>
+      <% end %>
       
       <%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f| %>
         

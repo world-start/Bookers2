@@ -20,9 +20,8 @@
         </tbody>
       </table>
 　<div class="row">
-   <%= link_to edit_user_path, class: "btn btn-outline-secondary form-control" do %>
-     <i class="fas fa-user-cog"></i>
-   <% end %>
+    <%= link_to "", edit_user_path(@user),class: "btn btn-outline-secondary btn-block fas fa-user-cog"  %>
+
   </div>
   
       
@@ -31,8 +30,8 @@
     <label>Title</label><br>
     <%= f.text_field :title %><br>
     <label>Opinion</label><br>
-    <%= f.text_area :opinion %><br>
-    <%= f.submit 'Create book', class:"btn btn-success" %>
+    <%= f.text_area :body %><br>
+    <%= f.submit 'Create Book', class:"btn btn-success" %>
   <% end %>
   </div>
   
@@ -59,17 +58,24 @@
                 <%= @book.title %>
               <% end %>
             </td>
-            <td><%= @book.opinion %></td>
-            <td><%= link_to 'Edit',edit_book_path, class:"btn btn-success" %></td>
-            <td>
-              <!--コピー.txtのif文入れる-->
+            <td><%= @book.body %></td>
+            
+              <td>
+                <% if @user.id == current_user.id %>
+                <%= link_to 'Edit',edit_book_path, class:"btn btn-success" %>
+                <% end %>
+              </td>
+              <td>
+                <% if @user.id == current_user.id %>
                 <%= link_to 'Destroy',book_path(@book.id), method: :delete, class:"btn btn-danger" %>
-            </td>
+                <% end %>
+              </td>
+            
           </tr>
           <tr>
             <td>
               <%= link_to user_path(@user) do %>
-                <%= current_user.name %>
+                <%= @user.name %><!--定義した@userからnameカラムを持ってってくる-->
               <% end %>
             </td>
           </tr>
